@@ -13,6 +13,9 @@ interface Topic {
 
 function CourseComponent(props: { id: string }) {
 
+    console.log("id is")
+    console.log(props.id)
+
     const [access, setAccess] = useState(false)
     const [course, setCourse] = useState<Course>();
     const [pageIndex, setPageIndex] = useState(0);
@@ -21,20 +24,7 @@ function CourseComponent(props: { id: string }) {
 
     const course_query = gql`
     query CourseById($id: ID!) {
-        UserContentItems {
-            id
-        }
         CourseById(id: $id) {
-            courseGroup {
-                asset
-                title
-                description
-                rating
-                ribbon
-                tags {
-                    label
-                }
-            }
             sections {
             title
             lessons {
@@ -77,16 +67,15 @@ function CourseComponent(props: { id: string }) {
 
     let content = <h1>Page not found</h1>
 
+    if (data) {
+        console.log("there is data")
+        console.log(data)
+    }
+
     useEffect(() => {
         if (data) {
             console.log(data)
             setCourse(data.CourseById)
-            let contentItems: Content[] = data.UserContentItems
-            for (let i = 0; i < contentItems.length; i++) {
-                if (contentItems[i].id == props.id) {
-                    setAccess(true)
-                }
-            }
             let newTopics: Topic[] = []
             data.CourseById.sections.map((section: { lessons: any[]; }) => {
                 section.lessons.map((lesson: { topics: any[]; }) => {

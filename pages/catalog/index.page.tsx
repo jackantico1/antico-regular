@@ -24,6 +24,7 @@ function Page() {
           title
           description
           asset
+          slug
         }
       }
     }`
@@ -39,12 +40,15 @@ function Page() {
       return <div 
         className='w-96 h-96 shadow-lg rounded-lg m-9'
         key={i}>
-        <img src={contentItem.asset} alt={contentItem.title} />
-        <h1 className='font-bold'>{contentItem.title}</h1>
+        <img src={contentItem.asset} alt={contentItem.title} className="w-96 h-60" />
+        <h1 className='font-bold text-base'>{contentItem.title}</h1>
         <h1>{contentItem.description}</h1>
         <h1
-          className='text-blue-500'
-          onClick={() => console.log('clicked')}
+          className='text-blue-500 hover:cursor-pointer text-right mr-5 underline'
+          onClick={() => {
+            console.log('clicked')
+            window.location.href = `/courses/${contentItem.slug}`
+          }}
           >
           View Details</h1>
       </div>
@@ -59,7 +63,7 @@ function Page() {
     <>
       <div className="font-primary">
         <NavBar />
-        <div className='flex flex-row overflow-auto'>
+        <div className='flex flex-row flex-wrap'>
           {content}
         </div>
         <Footer />

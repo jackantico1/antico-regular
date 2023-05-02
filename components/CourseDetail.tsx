@@ -55,7 +55,7 @@ function CourseDetail(props: { id: string }) {
         button = <button
         className="bg-brandPrimary-600 hover:bg-brandPrimary-900 text-white font-sans font-bold h-10 w-full md:h-14 rounded"
             onClick={() => {
-                location.href = `https://anticoregular.thoughtindustries.com/learn/${content?.slug}`
+                location.href = `/learn/${content?.slug}`
             }}>
                 Start Course
         </button>
